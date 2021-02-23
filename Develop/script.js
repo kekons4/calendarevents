@@ -8,31 +8,38 @@ var today = moment().format("dddd, MMMM Do YYYY");
 // Calender of the day
 var day = moment().startOf('day');
 
-var savedData = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+// initializes cookie
+var savedData = ["", "", "", "", "", "", "", "", ""];
 if (localStorage.getItem("calItems") === null) {
-    savedData = localStorage.setItem("calItems", JSON.stringify(savedData));
+    localStorage.setItem("calItems", JSON.stringify(savedData));
+    savedData = JSON.parse(localStorage.getItem("calItems").split(","));
 } else {
     savedData = localStorage.getItem("calItems");
+    savedData = JSON.parse(savedData.split(","));
 }
-console.log(savedData);
+// console.log(savedData);
 
-
+// generates html for each time block in the calender
 var calender = function () {
     for (let i = 0; i < 9; i++) {
-        var parsed = savedData.split(",")[i];
-
+        // Create Time Block
         var timeBlock = $("<div></div>");
         timeBlock.addClass("timeblock row");
 
+        // creates the hour element
         var hour = $("<div></div>");
         hour.addClass("hour");
         timeBlock.append(hour);
 
+        // creates the description element
         var description = $("<div></div>");
-        description.addClass("textarea present description");
+        description.addClass("textarea description");
+        description.attr("data-time", 9+i)
+        // creates the textarea and appends it into the description
         var textArea = $("<textarea id='test' placeholder='Enter Description...'></textarea>");
+        // checks if the cookies are empty or not
         if (savedData !== null) {
-            textArea.text(parsed);
+            textArea.text(savedData[i]);
         } else {
             textArea.text("");
         }
@@ -40,52 +47,29 @@ var calender = function () {
         description.append(textArea);
         timeBlock.append(description);
 
+        // creates the save the button
         var saveBtn = $("<div></div>");
         saveBtn.addClass("saveBtn");
         saveBtn.append("<i id='save' class='fa fa-save'></i>");
         timeBlock.append(saveBtn);
 
-        // Push timeBlock to calender
+        // Push timeBlock to container
         container.append(timeBlock);
     }
-    return container.children();
 }
 
+// Main function
 function main() {
     // Sets the Date on the Header
     currentDayEl.text(today);
     calender();
-    // auto generates html for the calender
-    // for (let i = 0; i < 9; i++) {
-    //     var timeBlock = $("<div></div>");
-    //     timeBlock.addClass("timeblock row");
-
-    //     var hour = $("<div></div>");
-    //     hour.addClass("hour");
-    //     timeBlock.append(hour);
-
-    //     var description = $("<div></div>");
-    //     description.addClass("textarea present description");
-    //     var textArea = $("<textarea id='test' placeholder='Enter Description...'></textarea>");
-    //     textArea.text(calender[i]);
-    //     textArea.attr("data-value", i);
-    //     description.append(textArea);
-    //     timeBlock.append(description);
-
-    //     var saveBtn = $("<div></div>");
-    //     saveBtn.addClass("saveBtn");
-    //     saveBtn.append("<i id='save' class='fa fa-save'></i>");
-    //     timeBlock.append(saveBtn);
-
-    //     // Push timeBlock to calender
-    //     container.append(timeBlock);
-    // }
 
     // variables that work with putting correct time for each time slot
     var hour = 9;
     var afternoon = 1;
+    var time = Number.parseInt(moment().format('H'));
 
-    // auto generates the correct 
+    // auto generates the correct color coding for the time block
     for (let i = 0; i < container.children().length; i++) {
         if (hour > 12) {
             container.children().eq(i).children().eq(0).text(afternoon + "pm");
@@ -99,19 +83,33 @@ function main() {
                 hour++;
             }
         }
+
+        // grabs the data-time value attribute
+        var dataTime = Number.parseInt(container.children().eq(i).children().eq(1).attr("data-time"));
+
+        //Determines which timeBlock is what color
+        if(time < dataTime) {
+            container.children().eq(i).children().eq(1).addClass("future")
+        } else if(time === dataTime) {
+            container.children().eq(i).children().eq(1).addClass("present")
+        } else {
+            container.children().eq(i).children().eq(1).addClass("past")
+        }
     }
 
 
 }
 
+// captures the event.target of the save button in the time block in .container
+// takes the text that user entered and saves it into the cookie for persistent storage
 container.on("click", "#save", function (event) {
-    var newArr = JSON.parse(savedData.split(","));
+    var newArr = savedData;
     var index = $(event.target).parent().parent().children().eq(1).children().attr("data-value");
     var text = $(event.target).parent().parent().children().eq(1).children().val();
     console.log(text);
-    console.log(JSON.parse(savedData)[index]);
+    console.log(savedData[index]);
     newArr[index] = text;
-    localStorage.setItem("calItems", newArr);
+    localStorage.setItem("calItems", JSON.stringify(newArr));
     console.log(localStorage.getItem("calItems"));
 });
 
