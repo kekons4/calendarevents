@@ -32,7 +32,7 @@ if (localStorage.getItem("calItems") === null) {
             expiry: moment().format('dddd, MMMM Do YYYY')
         }));
         savedData = JSON.parse(localStorage.getItem("calItems").split(","));
-        alert("Yesterday has been cleared");
+        alert("Yesterdays events have been cleared");
     }
 }
 

@@ -25,6 +25,7 @@ Live deployed link: https://kekons4.github.io/calendarevents/
 
 Clone the repository at https://github.com/kekons4/calendarevents.git add load it on
 code editor of your choice. Vscode is the prefered editor.
+Technology used: jquery, bootstrap, google font, awesome font, and moment.js
 
 ## Credits
 
