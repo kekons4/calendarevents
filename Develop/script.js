@@ -8,7 +8,7 @@ var today = moment().format("dddd, MMMM Do YYYY");
 // Calender of the day
 var day = moment().startOf('day');
 
-// initializes cookie
+// initializes object cookie
 var savedData = {
     value: ["", "", "", "", "", "", "", "", ""],
     expiry: moment().format('dddd, MMMM Do YYYY')
@@ -87,7 +87,8 @@ function main() {
     var afternoon = 1;
     var time = Number.parseInt(moment().format('H'));
 
-    // auto generates the correct color coding for the time block
+    // auto generates the correct color coding for the time block aswell as correct
+    // times for each timeBlock
     for (let i = 0; i < container.children().length; i++) {
         if (hour > 12) {
             container.children().eq(i).children().eq(0).text(afternoon + "pm");
