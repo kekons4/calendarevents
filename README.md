@@ -8,14 +8,14 @@ The project is a web event calendar. The user is show'n time slots in which they
 
 ## Screenshots
 
-[Screenshot_1](/assets/screenshots/screenshot_1.png)
+![Screenshot_1](/assets/screenshots/screenshot_1.png)
 
 ##### Homepage displaying the current date and all timeslots
 
-[Screenshot_2](/assets/screenshots/screenshot_2.png)
+![Screenshot_2](/assets/screenshots/screenshot_2.png)
 
 ##### Screenshot of individual time slot, closely showing time of day, description box, and blue save button
 
-[Screenshot_3](/assets/screenshots/screenshot_3.png)
+![Screenshot_3](/assets/screenshots/screenshot_3.png)
 
 ##### Screenshot of the text entered into the description
