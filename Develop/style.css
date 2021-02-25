@@ -4,13 +4,14 @@ body {
   line-height: 1;
 }
 
-textarea{
+textarea {
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+  width: 1000px;
 }
 
 .jumbotron {
@@ -21,25 +22,28 @@ textarea{
   border-bottom: 10px solid black;
 }
 
-.description{
+.description {
   white-space: pre-wrap;
 }
 
-.time-block{
+.time-block {
   text-align: center;
   border-radius: 15px;
+  margin-bottom: 10px;
 }
 
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid white;
+  ;
 }
 
 .hour {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+  padding: 20px;
 }
 
 .past {
@@ -58,14 +62,56 @@ textarea{
 }
 
 .saveBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  width: 30px;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1201px) {
+  textarea {
+    width: 800px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  textarea {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  textarea {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  textarea {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  textarea {
+    width: 100px;
+  }
 }
